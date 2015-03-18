@@ -38,13 +38,22 @@ class HijriDate:
         12: u'ذو الحجة'
     }
     day_dict = {
-        '6': u'السبت',
-        '7': u'الاحد',
-        '1': u'الاثنين',
-        '2': u'الثلاثاء',
-        '3': u'الاربعاء',
-        '4': u'الخميس',
-        '5': u'الجمعة'
+        6: u'السبت',
+        7: u'الاحد',
+        1: u'الاثنين',
+        2: u'الثلاثاء',
+        3: u'الاربعاء',
+        4: u'الخميس',
+        5: u'الجمعة'
+    }
+    day_dict_en = {
+        6: u'Saturday',
+        7: u'Sunday',
+        1: u'Monday',
+        2: u'Tuesday',
+        3: u'Wednesday',
+        4: u'Thursday',
+        5: u'Friday'
     }
     month_name_gr = ''
     day_name_en = ''
@@ -61,8 +70,9 @@ class HijriDate:
         self.year, self.month, self.day = um.gegorean_to_hijri(year,month,day)
         self.month_name = self.month_dict[self.month]
         date_gr = date(year,month,day)
-        self.day_name_en = date_gr.strftime("%u")
-        self.day_name = self.day_dict[self.day_name_en]
+        day_name_id = int(date_gr.strftime("%u"))
+        self.day_name_en = self.day_dict_en[day_name_id]
+        self.day_name = self.day_dict[day_name_id]
         self.month_name_gr = date_gr.strftime("%B")
     #Set dates if date send by user is Hijri
     def set_date(self,year,month,day):
@@ -71,8 +81,9 @@ class HijriDate:
         self.month_name = self.month_dict[month]
         self.year_gr, self.month_gr, self.day_gr = um.hijri_to_gregorian(year,month,day)
         date_gr = date(int(self.year_gr),int(self.month_gr),int(self.day_gr))
-        self.day_name_en = date_gr.strftime("%u")
-        self.day_name = self.day_dict[self.day_name_en]
+        day_name_id = int(date_gr.strftime("%u"))
+        self.day_name_en = self.day_dict_en[day_name_id]
+        self.day_name = self.day_dict[day_name_id]
         self.month_name_gr = date_gr.strftime("%B")
 
     @classmethod
